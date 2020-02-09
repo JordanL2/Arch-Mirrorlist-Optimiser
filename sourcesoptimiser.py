@@ -8,7 +8,7 @@ import time
 import urllib.request
 
 # Parameters
-sources_file = '/etc/pacman.d/mirrorlist'
+sources_file = '/etc/pacman.d/mirrorlist.pacnew'
 test_repo = 'extra'
 test_arch = 'x86_64'
 test_file = 'extra.files'
@@ -17,7 +17,7 @@ min_file_size = 9300000
 timeout = 30
 
 # Get list of sources
-command = "cat {} | grep \"^Server\" | sed -e \"s/^Server\\s*=\\s*//\"".format(sources_file)
+command = "cat {} | grep \"^#\\?Server\" | sed -e \"s/^#\\?Server\\s*=\\s*//\"".format(sources_file)
 result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 output = result.stdout.decode('utf-8').rstrip("\n")
 sources = output.split("\n")
